@@ -9,5 +9,7 @@ import java.util.UUID;
 public interface EventRepository {
   void insert(Event event);
 
+  void delete(UUID eventId);
+
   List<Event> findByIds(Set<UUID> eventIds);
 }

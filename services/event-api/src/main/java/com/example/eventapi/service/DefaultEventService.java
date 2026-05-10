@@ -15,6 +15,11 @@ public record DefaultEventService(EventRepository eventRepository) implements Ev
   }
 
   @Override
+  public void delete(UUID eventId) {
+    eventRepository.delete(eventId);
+  }
+
+  @Override
   public List<Event> getEventsBy(Set<UUID> eventIds) {
     return eventRepository.findByIds(eventIds);
   }

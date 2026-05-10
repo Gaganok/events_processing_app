@@ -10,5 +10,7 @@ public interface EventService {
 
   void create(Event event);
 
+  void delete(UUID eventId);
+
   List<Event> getEventsBy(Set<UUID> eventIds);
 }

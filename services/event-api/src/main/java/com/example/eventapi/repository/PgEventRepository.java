@@ -22,6 +22,13 @@ public record PgEventRepository(DSLContext dsl) implements EventRepository {
   }
 
   @Override
+  public void delete(UUID eventId) {
+    dsl.deleteFrom(EVENT.TABLE)
+        .where(EVENT.ID.eq(eventId))
+        .execute();
+  }
+
+  @Override
   public List<Event> findByIds(Set<UUID> eventIds) {
     return dsl.selectFrom(EVENT.TABLE)
         .where(EVENT.ID.in(eventIds))

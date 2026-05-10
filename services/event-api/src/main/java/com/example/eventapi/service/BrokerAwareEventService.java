@@ -36,4 +36,9 @@ public class BrokerAwareEventService implements EventService {
   public List<Event> getEventsBy(Set<UUID> eventIds) {
     return delegate.getEventsBy(eventIds);
   }
+
+  @Override
+  public void delete(UUID eventId) {
+    delegate.delete(eventId);
+  }
 }

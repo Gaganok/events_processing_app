@@ -1,5 +1,5 @@
 CREATE TABLE events_outbox (
-    id UUID PRIMARY KEY REFERENCES events(id),
+    id UUID PRIMARY KEY REFERENCES events(id) ON DELETE CASCADE,
     status VARCHAR(20) NOT NULL,
     retries INT NOT NULL,
     processing_started_at TIMESTAMP NULL,
