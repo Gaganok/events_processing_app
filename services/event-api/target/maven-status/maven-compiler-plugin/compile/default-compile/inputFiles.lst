@@ -1,0 +1,17 @@
+/Users/oleole/Downloads/be-test-task/services/event-api/src/main/java/com/example/eventapi/Application.java
+/Users/oleole/Downloads/be-test-task/services/event-api/src/main/java/com/example/eventapi/configuration/EventConfiguration.java
+/Users/oleole/Downloads/be-test-task/services/event-api/src/main/java/com/example/eventapi/configuration/KafkaConfiguration.java
+/Users/oleole/Downloads/be-test-task/services/event-api/src/main/java/com/example/eventapi/configuration/SecurityConfiguration.java
+/Users/oleole/Downloads/be-test-task/services/event-api/src/main/java/com/example/eventapi/controller/EventController.java
+/Users/oleole/Downloads/be-test-task/services/event-api/src/main/java/com/example/eventapi/controller/dto/EventResponse.java
+/Users/oleole/Downloads/be-test-task/services/event-api/src/main/java/com/example/eventapi/controller/dto/EventResponseStatus.java
+/Users/oleole/Downloads/be-test-task/services/event-api/src/main/java/com/example/eventapi/controller/type/JsonString.java
+/Users/oleole/Downloads/be-test-task/services/event-api/src/main/java/com/example/eventapi/domain/Event.java
+/Users/oleole/Downloads/be-test-task/services/event-api/src/main/java/com/example/eventapi/domain/EventMessage.java
+/Users/oleole/Downloads/be-test-task/services/event-api/src/main/java/com/example/eventapi/domain/EventStatus.java
+/Users/oleole/Downloads/be-test-task/services/event-api/src/main/java/com/example/eventapi/repository/EventRepository.java
+/Users/oleole/Downloads/be-test-task/services/event-api/src/main/java/com/example/eventapi/repository/PgEventRepository.java
+/Users/oleole/Downloads/be-test-task/services/event-api/src/main/java/com/example/eventapi/repository/Schema.java
+/Users/oleole/Downloads/be-test-task/services/event-api/src/main/java/com/example/eventapi/service/BrokerAwareEventService.java
+/Users/oleole/Downloads/be-test-task/services/event-api/src/main/java/com/example/eventapi/service/DefaultEventService.java
+/Users/oleole/Downloads/be-test-task/services/event-api/src/main/java/com/example/eventapi/service/EventService.java

@@ -1,0 +1,10 @@
+-------------------------------------------------------------------------------
+Test set: com.example.eventapi.repository.PgEventRepositoryTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.577 s <<< FAILURE! -- in com.example.eventapi.repository.PgEventRepositoryTest
+com.example.eventapi.repository.PgEventRepositoryTest.shouldInsertEvent -- Time elapsed: 0.010 s <<< ERROR!
+org.junit.jupiter.api.extension.ParameterResolutionException: No ParameterResolver registered for parameter [com.example.eventapi.repository.EventRepository repository] in constructor [com.example.eventapi.repository.PgEventRepositoryTest(com.example.eventapi.repository.EventRepository,org.jooq.DSLContext)].
+	at java.base/java.util.Optional.orElseGet(Optional.java:364)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+
