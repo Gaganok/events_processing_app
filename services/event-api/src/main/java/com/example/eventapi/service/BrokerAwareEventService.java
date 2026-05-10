@@ -1,19 +1,39 @@
 package com.example.eventapi.service;
 
 import com.example.eventapi.domain.Event;
-import com.example.eventapi.domain.EventMessage;
-import org.springframework.kafka.core.KafkaTemplate;
+import com.example.eventapi.domain.EventOutbox;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.transaction.annotation.Transactional;
 
-public record BrokerAwareEventService(EventService delegate,
-                                      KafkaTemplate<String, EventMessage> kafkaTemplate) implements EventService {
+import java.util.List;
+import java.util.Set;
+import java.util.UUID;
 
-  private static final String TOPIC = "events";
+public class BrokerAwareEventService implements EventService {
+
+  private final EventService delegate;
+  private final EventOutboxService outboxService;
+  private final ApplicationEventPublisher publisher;
+
+  public BrokerAwareEventService(EventService delegate, EventOutboxService outboxService, ApplicationEventPublisher publisher) {
+    this.delegate = delegate;
+    this.outboxService = outboxService;
+    this.publisher = publisher;
+  }
 
   @Override
   @Transactional
   public void create(Event event) {
     delegate.create(event);
-    kafkaTemplate.send(TOPIC, event.id().toString(), EventMessage.from(event));
+
+    var outbox = EventOutbox.from(event);
+    outboxService.create(outbox);
+
+    publisher.publishEvent(new OutboxDispatcher.OutboxPublishEvent(event, outbox));
+  }
+
+  @Override
+  public List<Event> getEventsBy(Set<UUID> eventIds) {
+    return delegate.getEventsBy(eventIds);
   }
 }

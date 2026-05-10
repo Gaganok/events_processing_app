@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
 
+import java.util.Set;
+
 import static com.example.eventapi.repository.Schema.EVENT;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -40,4 +42,18 @@ class PgEventRepositoryTest {
     assertThat(result).isNotNull();
     assertThat(result.get(EVENT.ID)).isEqualTo(expected);
   }
+
+  @Test
+  void shouldFindEventsByIds() {
+    var event1 = Event.from("{\"type\":\"USER_CREATED\"}");
+    var event2 = Event.from("{\"type\":\"USER_UPDATED\"}");
+    underTest.insert(event1);
+    underTest.insert(event2);
+
+    var result = underTest.findByIds(Set.of(event1.id(), event2.id()));
+
+    assertThat(result).hasSize(2);
+    assertThat(result).extracting(Event::id).containsExactlyInAnyOrder(event1.id(), event2.id());
+  }
+  
 }

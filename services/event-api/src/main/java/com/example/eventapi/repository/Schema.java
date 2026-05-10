@@ -1,6 +1,7 @@
 package com.example.eventapi.repository;
 
 import com.example.eventapi.domain.EventStatus;
+import com.example.eventapi.domain.OutboxStatus;
 import org.jooq.DataType;
 import org.jooq.Field;
 import org.jooq.Record;
@@ -20,6 +21,20 @@ public final class Schema {
   }
 
   public static final EventTable EVENT = new EventTable();
+  public static final EventOutboxTable EVENT_OUTBOX = new EventOutboxTable();
+
+  public static final class EventOutboxTable {
+    public final Table<Record> TABLE = tableName("events_outbox");
+    public final Field<UUID> EVENT_ID = tableField(TABLE, "id", UUID.class);
+    public final Field<OutboxStatus> STATUS = tableField(TABLE, "status", enumType(OutboxStatus.class));
+    public final Field<Integer> RETRIES = tableField(TABLE, "retries", Integer.class);
+    public final Field<Instant> PROCESSING_STARTED_AT = tableField(TABLE, "processing_started_at", Instant.class);
+    public final Field<Instant> CREATED_AT = tableField(TABLE, "created_at", Instant.class);
+    public final List<Field<?>> COLUMNS = List.of(EVENT_ID, STATUS, RETRIES, CREATED_AT);
+
+    private EventOutboxTable() {
+    }
+  }
 
   public static final class EventTable {
     public final Table<Record> TABLE = tableName("events");

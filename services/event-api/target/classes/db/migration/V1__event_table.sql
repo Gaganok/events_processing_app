@@ -2,7 +2,7 @@ CREATE TABLE IF NOT EXISTS events (
     id          UUID PRIMARY KEY,
     payload     TEXT        NOT NULL,
     status      VARCHAR(50) NOT NULL,
-    created_at  TIMESTAMP   NOT NULL DEFAULT NOW()
+    created_at   TIMESTAMP   NOT NULL
 );
 
 CREATE INDEX IF NOT EXISTS idx_events_created_at ON events (created_at);

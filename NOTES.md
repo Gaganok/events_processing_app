@@ -34,7 +34,7 @@ Cons:
 - Might be complications depending on the CD pipeline (migrations may need to run separately).
 
 ### Test container for integration tests
-I used Testcontainers to run a Postgres instance for integration tests.
+I used Test containers to run a Postgres instance for integration tests.
 This allows me to test against a real database instance, ensuring that the queries and data access code work as expected in a realistic environment.
 This is especially important for the stats endpoint, where I want to ensure that the queries perform well and return correct results.
 
@@ -48,9 +48,22 @@ Cons:
 - Slower test execution compared to in-memory databases or mocks.
 - Adds complexity to the test setup and requires Docker to be available for running tests.
 
-### Kafka Naive Implementation
-Current Kafka implementation is very basic and does not handle retries, fallbacks, or idempotency.
-More robust Kafka approach coming.
+### Kafka Outbox Implementation
+I have implemented a custom transactional outbox pattern to ensure reliable event publishing to Kafka.
+The solution combines an immediate dispatch path (via TransactionalEventListener after commit) 
+with scheduled polling for retries and stuck event recovery. 
+Events are claimed, processed, and marked as completed in a way that ensures at-least-once delivery without duplicates, even in failure scenarios.
+This approach provides a robust and scalable solution for event publishing while maintaining data integrity and consistency.
+
+Pros:
+- Ensures reliable event publishing to Kafka with at-least-once delivery guarantees.
+- Handles retries and stuck events gracefully, ensuring that events are not lost or duplicated.
+- Personal preference: I prefer a custom implementation that I can control and understand fully, rather than relying on external libraries or frameworks.
+
+Cons:
+- Might be too complex for simple use cases where a simpler solution might suffice.
+- Requires careful handling of transactions and concurrency to avoid issues with event processing.
+- Ready solutions also available like Debezium or Spring Cloud Stream with Kafka, which might be easier to set up and maintain for some teams.
 
 ### Spring Security
 -- To Do
